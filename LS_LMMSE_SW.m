@@ -159,8 +159,8 @@ for iN_total = 1:length(N_total_list)
                 g_m = zeros(N, 1);
                 for n = 1:N
                     dist_n = norm(psi_p_m(n,:) - psi_0_p);
-                    atten_dB_per_m = 0.1;
-                    atten_linear = 10^(-atten_dB_per_m * dist_n / 10);
+                    atten_dB_per_m = 0.2;
+                    atten_linear = 10^(-atten_dB_per_m * dist_n / 20);
                     g_m(n) = atten_linear * exp(-1j*2*pi*dist_n / lambda_g);
                 end
                 g_prop(ant_indices_m) = g_m;
