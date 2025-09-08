@@ -132,7 +132,7 @@ for iN_total = 1:length(N_total_list)
                         dist2 = norm(scatter_psi - psi_m);
                         total_dist = dist1 + dist2;
                          if total_dist < 1e-6, total_dist = 1e-6; end
-                         h_sca = h_sca + (1/(p_^0.5)) * (lambda / (4*pi*total_dist)) * exp(-1j*2*pi*total_dist / lambda) * exp(-1j*rand*2*pi);
+                         h_sca = h_sca + (1/(p_^0.5)) * (lambda / (4*pi*dist1 * dist2)) * exp(-1j*2*pi*total_dist / lambda) * exp(-1j*rand*2*pi);
                     end
                     % --- Rician Combination with LoS Probability (5G mmWave standard) ---
                     distance_LoS = dist_los;
@@ -309,3 +309,4 @@ title(sprintf('NMSE vs N_{total} (Sequential Probing, SNR = %.1f dB)', SNR_plot_
 
 
 %% ========== 4. OMP 函数 ========== (OMP Function REMOVED)
+
