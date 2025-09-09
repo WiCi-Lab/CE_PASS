@@ -90,7 +90,7 @@ for N = 4:4:N_ants
                 % p_LOS
                 if distance_LoS <= 12
                     p_LOS = 1;
-                elseif distance_LoS < 20
+                elseif distance_LoS < 20 && distance_LoS > 12
                     p_LOS = exp(-(distance_LoS-1.2)/4.7);
                 else
                     p_LOS = 0.32 * exp(-(distance_LoS-6.5)/32.6);
@@ -152,3 +152,4 @@ for N = 4:4:N_ants
 end
 
 disp('Dataset generation complete without per-sample amplitude normalization.');
+
