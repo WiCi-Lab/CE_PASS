@@ -134,15 +134,19 @@ for iN_total = 1:length(N_total_list)
                          if total_dist < 1e-6, total_dist = 1e-6; end
                          h_sca = h_sca + (1/(p_^0.5)) * (lambda / (4*pi*dist1 * dist2)) * exp(-1j*2*pi*total_dist / lambda) * exp(-1j*rand*2*pi);
                     end
-                    % --- Rician Combination with LoS Probability (5G mmWave standard) ---
+                    % --- Rician Combination with LoS Probability ---
                     distance_LoS = dist_los;
-                    if distance_LoS <= 1.2
+
+                    if distance_LoS <= 12
                         p_LOS = 1;
-                    elseif distance_LoS < 6.5 && distance_LoS > 1.2 
-                        p_LOS = exp(-(distance_LoS-1.2)/4.7); % Example decay model
+                    elseif distance_LoS < 20 && distance_LoS > 12
+                        p_LOS = exp(-(distance_LoS-1.2)/4.7);
                     else
-                        p_LOS = 0.32 * exp(-(distance_LoS-6.5)/32.6); % Example decay model
+                        p_LOS = 0.32 * exp(-(distance_LoS-6.5)/32.6);
                     end
+                    I_LOS = randsrc(1,1,[1,0; p_LOS, 1-p_LOS]);
+
+                    
                     I_LOS = randsrc(1,1,[1,0; p_LOS, 1-p_LOS]); % Randomly include LoS path
 
                     h_LoS_part = sqrt(Ricain_K / (Ricain_K + 1)) * h_LoS;
@@ -309,4 +313,5 @@ title(sprintf('NMSE vs N_{total} (Sequential Probing, SNR = %.1f dB)', SNR_plot_
 
 
 %% ========== 4. OMP 函数 ========== (OMP Function REMOVED)
+
 
